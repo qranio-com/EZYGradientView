@@ -7,7 +7,7 @@ Pod::Spec.new do |s|
   s.homepage          = 'https://github.com/shashankpali/EZYGradientView'
   s.authors           = { 'Shashank Pali' => 'shank.pali@gmail.com' }
   s.summary           = 'Create gradients and blur gradients without a single line of code'
-  s.source            = { :git => 'https://github.com/shashankpali/EZYGradientView.git', :tag => s.version }
+  s.source            = { :git => 'https://github.com/qranio-com/EZYGradientView.git', :tag => s.version }
   s.source_files      = 'EZYGradientView/*.swift'
   s.requires_arc      = true
 end
