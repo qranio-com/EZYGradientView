@@ -106,9 +106,17 @@ public class EZYGradientView: UIView
         }
     }
     
-    private var blurView: UIVisualEffectView?
-    public var blurLayer: CALayer?
-    public var gradientLayer: CAGradientLayer?
+    fileprivate var blurView: UIVisualEffectView?
+    open var blurLayer: CALayer?
+    open var gradientLayer: CAGradientLayer?
+    {
+        return (layer as? CAGradientLayer)
+    }
+    
+    override public class var layerClass: AnyClass
+    {
+        return CAGradientLayer.self
+    }
     
     //MARK:- Designated Initializer
     
@@ -126,14 +134,8 @@ public class EZYGradientView: UIView
     
     //MARK:- Draw Rect with steps
     
-    override public func draw(_ rect: CGRect)
+    override open func draw(_ rect: CGRect)
     {
-        if gradientLayer == nil
-        {
-            gradientLayer = CAGradientLayer()
-            gradientLayer!.frame = self.bounds
-            layer.insertSublayer(gradientLayer!, at: 0)
-        }
         self.updateColors()
         self.updatePoints()
         self.updateLocation()
@@ -142,31 +144,31 @@ public class EZYGradientView: UIView
     /**
      Step 1
      */
-    private func updateColors()
+    fileprivate func updateColors()
     {
         gradientLayer!.colors = [firstColor.cgColor, secondColor.cgColor]
     }
-    /*
+    /**
      Step 2
      */
-    private func updatePoints()
+    fileprivate func updatePoints()
     {
         let points = startEndPoints()
         gradientLayer!.startPoint = points.0
         gradientLayer!.endPoint = points.1
     }
-    /*
+    /**
      Step 3
      */
-    private func updateLocation()
+    fileprivate func updateLocation()
     {
         let colorLoc = locations()
         gradientLayer!.locations = [NSNumber(value: colorLoc.0), NSNumber(value: colorLoc.1)]
     }
-    /*
+    /**
      Step 4
      */
-    private func checkBlurStatusAndUpdateOpacity()
+    fileprivate func checkBlurStatusAndUpdateOpacity()
     {
         if isBlur
         {
